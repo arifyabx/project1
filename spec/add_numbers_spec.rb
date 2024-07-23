@@ -38,4 +38,18 @@ RSpec.describe "add_numbers" do
       expect(add_numbers("1\n2\n3")).to eq(6)
     end
   end
+
+  context "when input contains non-numeric characters" do
+    it "raises ArgumentError for alphabetic characters" do
+      expect { add_numbers("1,a,3") }.to raise_error(ArgumentError, "Input contains non-numeric characters")
+    end
+
+    it "raises ArgumentError for alphanumeric characters" do
+      expect { add_numbers("1,bcd,3") }.to raise_error(ArgumentError, "Input contains non-numeric characters")
+    end
+
+    it "raises ArgumentError for special characters" do
+      expect { add_numbers("1,$,3") }.to raise_error(ArgumentError, "Input contains non-numeric characters")
+    end
+  end
 end
