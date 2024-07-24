@@ -52,4 +52,18 @@ RSpec.describe "add_numbers" do
       expect { add_numbers("1,$,3") }.to raise_error(ArgumentError, "Input contains non-numeric characters")
     end
   end
+
+  context "when input contains custom delimiter" do
+    it "returns the correct sum with semicolon delimiter" do
+      expect(add_numbers("//;\n1;2;3")).to eq(6)
+    end
+
+    it "returns the correct sum with pipe delimiter" do
+      expect(add_numbers("//|\n4|5|6")).to eq(15)
+    end
+
+    it "handles input with negative numbers and returns them" do
+      expect(add_numbers("//;\n-1;2;-3")).to eq("-1,-3")
+    end
+  end
 end
